@@ -58,26 +58,6 @@ class FlightController extends Controller
     }
 
     /**
-     * Deletes a flight entity.
-     *
-     * @Route("/{id}", name="flight_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Flight $flight)
-    {
-        $form = $this->createDeleteForm($flight);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($flight);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('flight_index');
-    }
-
-    /**
      * Finds and displays a flight entity.
      *
      * @Route("/{id}", name="flight_show")
@@ -116,6 +96,26 @@ class FlightController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Deletes a flight entity.
+     *
+     * @Route("/{id}", name="flight_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Flight $flight)
+    {
+        $form = $this->createDeleteForm($flight);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($flight);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('flight_index');
     }
 
     /**

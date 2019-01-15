@@ -54,6 +54,18 @@ class Reservation
     }
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="passengers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $passenger;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Flight", inversedBy="flights")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $flight;
+
+    /**
      * Set nbReservedSeats
      *
      * @param integer $nbReservedSeats
@@ -124,5 +136,57 @@ class Reservation
     {
         return $this->wasDone;
     }
-}
 
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
+
+    /**
+     * Set passenger
+     *
+     * @param \AppBundle\Entity\User $passenger
+     *
+     * @return Reservation
+     */
+    public function setPassenger(\AppBundle\Entity\User $passenger)
+    {
+        $this->passenger = $passenger;
+
+        return $this;
+    }
+
+    /**
+     * Get passenger
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getPassenger()
+    {
+        return $this->passenger;
+    }
+
+    /**
+     * Set flight
+     *
+     * @param \AppBundle\Entity\Flight $flight
+     *
+     * @return Reservation
+     */
+    public function setFlight(\AppBundle\Entity\Flight $flight)
+    {
+        $this->flight = $flight;
+
+        return $this;
+    }
+
+    /**
+     * Get flight
+     *
+     * @return \AppBundle\Entity\Flight
+     */
+    public function getFlight()
+    {
+        return $this->flight;
+    }
+}

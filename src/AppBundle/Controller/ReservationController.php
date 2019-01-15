@@ -58,27 +58,6 @@ class ReservationController extends Controller
     }
 
     /**
-     * Deletes a reservation entity.
-     *
-     * @Route("/{id}", name="reservation_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Reservation $reservation)
-    {
-        $form = $this->createDeleteForm($reservation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($reservation);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('reservation_index');
-    }
-
-
-    /**
      * Finds and displays a reservation entity.
      *
      * @Route("/{id}", name="reservation_show")
@@ -117,6 +96,26 @@ class ReservationController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Deletes a reservation entity.
+     *
+     * @Route("/{id}", name="reservation_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Reservation $reservation)
+    {
+        $form = $this->createDeleteForm($reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($reservation);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('reservation_index');
     }
 
     /**
