@@ -3,14 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,64 +20,64 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=32)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
      */
-    private $phoneNumber;
+    protected $phoneNumber;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="datetime")
      */
-    private $birthDate;
+    protected $birthDate;
 
     /**
      * @var int
      *
      * @ORM\Column(name="note", type="smallint")
      */
-    private $note;
+    protected $note;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="isACertifiedPilot", type="boolean")
      */
-    private $isACertifiedPilot;
+    protected $isACertifiedPilot;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Review", mappedBy="reviewAuthor")
      */
-    private $reviewAuthors;
+    protected $reviewAuthors;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Flight", mappedBy="pilot")
      */
-    private $pilots;
+    protected $pilots;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="passenger")
      */
-    private $passengers;
+    protected $passengers;
 
     /**
      * Get id
@@ -241,6 +242,7 @@ class User
      */
     public function __construct()
     {
+        parent::__construct();
         $this->reviewAuthors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
