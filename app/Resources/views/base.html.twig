@@ -3,11 +3,40 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/style.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="{{ path('homepage') }}">Flyaround</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link btn btn-light mr-1" href="{{ path('planemodel_index') }}">Avions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light mr-1" href="{{ path('reservation_index') }}">Réservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light mr-1" href="{{ path('flight_index')}}">Vols</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light mr-1" href="{{ path('site_index') }}">Terrains</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light mr-1" href="{{ path('review_index') }}">Avis</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5 pt-4">
+            {% block body %}{% endblock %}
+        </div>
+        <script src="{{ asset('build/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
